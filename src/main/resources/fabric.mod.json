@@ -1,0 +1,30 @@
+{
+    "schemaVersion": 1,
+    "id": "moreluckpermscontexts",
+    "version": "${version}",
+    "name": "More LuckPerms Contexts",
+    "description": "Adds more contexts to LuckPerms.",
+    "authors": [
+        "VelizarBG"
+    ],
+    "contact": {
+        "repo": "https://github.com/VelizarBG/moreluckpermscontexts"
+    },
+    "license": "MIT",
+    "icon": "assets/moreluckpermscontexts/textures/gui/sprites/icon.png",
+    "environment": "*",
+    "entrypoints": {
+        "main": [
+            "velizarbg.moreluckpermscontexts.MoreLuckPermsContextsMod"
+        ]
+    },
+    "mixins": [
+        "moreluckpermscontexts.mixins.json"
+    ],
+    "depends": {
+        "fabricloader": "${loader_dependency}",
+        "minecraft": "${minecraft_dependency}",
+        "fabric-api": ">=${fabric_version}",
+        "luckperms": "^${luckperms_version}"
+    }
+}
