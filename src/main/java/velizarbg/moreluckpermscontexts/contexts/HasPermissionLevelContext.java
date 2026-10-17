@@ -4,10 +4,12 @@ import net.luckperms.api.context.ContextCalculator;
 import net.luckperms.api.context.ContextConsumer;
 import net.luckperms.api.context.ContextSet;
 import net.luckperms.api.context.ImmutableContextSet;
-import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.server.permissions.Permission;
+import net.minecraft.server.permissions.PermissionLevel;
 import org.jetbrains.annotations.NotNull;
 
-public class HasPermissionLevelContext implements ContextCalculator<ServerPlayerEntity> {
+public class HasPermissionLevelContext implements ContextCalculator<ServerPlayer> {
 	public static final String HAS_PERMISSION_LEVEL_KEY = "has_permission_level_";
 	private final int permissionLevel;
 	private final String hasPermissionLevelKey;
@@ -18,8 +20,9 @@ public class HasPermissionLevelContext implements ContextCalculator<ServerPlayer
 	}
 
 	@Override
-	public void calculate(@NotNull ServerPlayerEntity target, @NotNull ContextConsumer consumer) {
-		consumer.accept(hasPermissionLevelKey, target.hasPermissionLevel(permissionLevel) ? "true" : "false");
+	public void calculate(@NotNull ServerPlayer target, @NotNull ContextConsumer consumer) {
+		consumer.accept(hasPermissionLevelKey, Boolean.toString(
+			target.permissions().hasPermission(new Permission.HasCommandLevel(PermissionLevel.byId(permissionLevel)))));
 	}
 
 	@Override
